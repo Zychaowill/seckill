@@ -3,13 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.seckill.dao.SecKillDao">
-    <!--为DAO接口方法提供sql语句配置-->
     <update id="reduceNumber">
-        <!--具体的sql-->
         update
-        seckill
+        	seckill
         set
-        number = number -1
+        	number = number -1
         where seckill_id = #{secKillId}
         and start_time <![CDATA[ <= ]]> #{killTime}
         and end_time >= #{killTime}
@@ -17,13 +15,13 @@
     </update>
 
     <select id="queryById" resultType="SecKill" parameterType="long">
-        select seckill_id,name,number,start_time,end_time,create_time
+        select seckill_id, name, number, start_time, end_time, create_time
         from seckill
         where seckill_id = #{secKillId}
     </select>
 
     <select id="queryAll" resultType="SecKill">
-        select seckill_id,name,number,start_time,end_time,create_time
+        select seckill_id, name, number, start_time, end_time, create_time
         from seckill
         order by create_time desc
         limit #{offset},#{limit}

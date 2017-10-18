@@ -7,15 +7,15 @@ import org.seckill.entity.SuccessKilled;
  */
 public interface SuccessKilledDao {
     /**
-     * 插入购买明细，可过滤重复
+     * Insert purchase details and filter duplicates.
      * @param secKillId
      * @param userPhone
-     * @return插入的行数
+     * @return the rows of insert
      */
     int insertSuccessKilled(long secKillId,long userPhone);
 
     /**
-     *根据ID查询SuccessKilled并携带秒杀产品对象实体
+     * Query SuccessKilled according to ID and carry product object entity of spike.
      * @param secKillId
      * @return
      */
