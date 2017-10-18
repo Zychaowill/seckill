@@ -20,12 +20,13 @@ public class Exposer {
 		this.md5 = md5;
 	}
 
-	public Exposer(boolean exposed, long now, long start, long end) {
-		this.exposed = exposed;
-		this.now = now;
-		this.start = start;
-		this.end = end;
-	}
+    public Exposer(boolean exposed, long secKillId, long now, long start, long end) {
+        this.exposed = exposed;
+        this.now = now;
+        this.start = start;
+        this.secKillId = secKillId;
+        this.end = end;
+    }
 
 	public Exposer(boolean exposed, long secKillId) {
 		this.exposed = exposed;

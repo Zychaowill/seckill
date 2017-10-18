@@ -1,5 +1,6 @@
 package org.seckill.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.seckill.entity.SuccessKilled;
 
 /**
@@ -12,12 +13,12 @@ public interface SuccessKilledDao {
      * @param userPhone
      * @return the rows of insert
      */
-    int insertSuccessKilled(long secKillId,long userPhone);
+    int insertSuccessKilled(@Param("secKillId") long secKillId, @Param("userPhone") long userPhone);
 
     /**
      * Query SuccessKilled according to ID and carry product object entity of spike.
      * @param secKillId
      * @return
      */
-    SuccessKilled queryByIdWithSecKill(long secKillId);
+    SuccessKilled queryByIdWithSecKill(@Param("secKillId") long secKillId, @Param("userPhone") long userPhone);
 }

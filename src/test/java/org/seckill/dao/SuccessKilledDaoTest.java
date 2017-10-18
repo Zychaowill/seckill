@@ -14,16 +14,17 @@ public class SuccessKilledDaoTest {
 
 	@Resource
 	private SuccessKilledDao successKilledDao;
-	
+
 	@Test
-	public void testInsertSuccesKilled() throws Exception {
+	public void testInertSuccessKilled() throws Exception {
 		int result = successKilledDao.insertSuccessKilled(1000L, 28059830451L);
 		System.out.println(result);
+
 	}
-	
+
 	@Test
 	public void testQueryByIdWithSecKill() throws Exception {
-		SuccessKilled successKilled = successKilledDao.queryByIdWithSecKill(2147483647L);
+		SuccessKilled successKilled = successKilledDao.queryByIdWithSecKill(1000L, 2147483647L);
 		System.out.println(successKilled.toString());
 	}
 }

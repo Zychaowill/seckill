@@ -1,5 +1,6 @@
 package org.seckill.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.seckill.entity.SecKill;
 
 import java.util.Date;
@@ -15,7 +16,7 @@ public interface SecKillDao {
      * @param killTime
      * @return If the number of rows is greater than 1, it's that is updated.
      */
-    int reduceNumber(long secKillId,Date killTime);
+    int reduceNumber(@Param("secKillId") long secKillId, @Param("killTime") Date killTime);
 
     /**
      * Query SecKill object by id.
@@ -30,5 +31,5 @@ public interface SecKillDao {
      * @param limit
      * @return
      */
-    List<SecKill> queryAll(int offset, int limit);
+    List<SecKill> queryAll(@Param("offset") int offset, @Param("limit") int limit);
 }

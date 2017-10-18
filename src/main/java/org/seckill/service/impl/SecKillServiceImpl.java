@@ -19,9 +19,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
-@Service("secKillService")
+@Service
 public class SecKillServiceImpl implements SecKillService {
 	private Logger logger = LoggerFactory.getLogger(SecKillService.class);
 
@@ -55,7 +56,7 @@ public class SecKillServiceImpl implements SecKillService {
 		Date nowTime = new Date();
 
 		if (nowTime.getTime() < startTime.getTime() || nowTime.getTime() > endTime.getTime()) {
-			return new Exposer(false, nowTime.getTime(), startTime.getTime(), endTime.getTime());
+			return new Exposer(false, secKillId, nowTime.getTime(), startTime.getTime(), endTime.getTime());
 		}
 
 		String md5 = getMD5(secKillId);
@@ -64,6 +65,7 @@ public class SecKillServiceImpl implements SecKillService {
 	}
 
 	@Override
+	@Transactional
 	public SecKillExecution executeSecKill(long secKillId, long userPhone, String md5)
 			throws SecKillException, RepeatKillException, SecKillCloseException {
 		if (Objects.isNull(md5) || md5.equals(getMD5(secKillId))) {
@@ -82,10 +84,9 @@ public class SecKillServiceImpl implements SecKillService {
 				if (insertCount <= 0) {
 					throw new RepeatKillException("SecKill repeated");
 				} else {
-					SuccessKilled successKilled = successKilledDao.queryByIdWithSecKill(secKillId);
+					SuccessKilled successKilled = successKilledDao.queryByIdWithSecKill(secKillId, userPhone);
 
-					return new SecKillExecution(secKillId, SecKillStateEnum.SUCCESS.getState(),
-							SecKillStateEnum.SUCCESS.getStateInfo(), successKilled);
+					return new SecKillExecution(secKillId, SecKillStateEnum.SUCCESS, successKilled);
 				}
 			}
 		} catch (SecKillCloseException e1) {
